@@ -2,6 +2,7 @@ import json
 import logging
 from time import time
 
+from aiohttp import ClientSession
 from .settings import BASE_URL, CACHE, CACHE_TIMEOUT
 
 # logger
@@ -16,7 +17,7 @@ sort_by = {
 }
 
 
-async def get(tag, session):
+async def get(tag: str, session: ClientSession) -> dict:
     try:
         async with session.get(url=f"{BASE_URL}?tag={tag}") as response:
             logger.debug(f"fetching posts for tag <{tag}>")
